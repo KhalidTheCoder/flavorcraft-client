@@ -1,0 +1,130 @@
+import React, { useState } from "react";
+import { NavLink } from "react-router";
+
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  return (
+    <div>
+      <header className="bg-[#A31621] text-[#FCF7F8] shadow-md sticky top-0 z-50">
+        <div className="container mx-auto flex items-center justify-between px-4 py-3 h-16">
+          <a
+            href="/"
+            className="text-2xl font-bold tracking-wide hover:text-white transition duration-300"
+          >
+            FlavorCraft
+          </a>
+
+          <nav className="hidden lg:flex space-x-6 text-sm font-medium">
+            <NavLink to="/" className="relative group transition duration-300">
+              <span className="hover:text-white">Home</span>
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+            </NavLink>
+
+            <NavLink
+              to="/recipes"
+              className="relative group transition duration-300"
+            >
+              <span className="hover:text-white">All Recipes</span>
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+            </NavLink>
+
+            <NavLink
+              to="/add-recipe"
+              className="relative group transition duration-300"
+            >
+              <span className="hover:text-white">Add Recipe</span>
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+            </NavLink>
+
+            <NavLink
+              to="/my-recipes"
+              className="relative group transition duration-300"
+            >
+              <span className="hover:text-white">My Recipes</span>
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+            </NavLink>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            {/* <div className="relative hidden md:block">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 512 512"
+                  className="w-4 h-4 text-[#FCF7F8] opacity-70"
+                >
+                  <path d="M479.6,399.716l-81.084-81.084...Z"></path>
+                </svg>
+              </span>
+              <input
+                type="search"
+                placeholder="Search..."
+                className="pl-8 pr-3 py-1.5 bg-[#FCF7F8] text-black text-sm rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:bg-white"
+              />
+            </div> */}
+
+            <div className="flex items-center space-x-2">
+              <a
+                href="/login"
+                className="text-sm font-medium hover:text-white transition duration-300"
+              >
+                Login
+              </a>
+              <a
+                href="/register"
+                className="px-3 py-1.5 bg-[#FCF7F8] text-[#A31621] rounded-md text-sm font-semibold transition duration-300 hover:bg-white hover:scale-105 transform"
+              >
+                Register
+              </a>
+            </div>
+          </div>
+
+          <button
+            className="lg:hidden p-2 focus:outline-none"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <svg
+              className="w-6 h-6 text-[#FCF7F8]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      {isMobileMenuOpen && (
+        <div className="lg:hidden bg-[#A31621] text-[#FCF7F8] px-4 py-2 space-y-2">
+          <NavLink to="/" className="block font-medium hover:text-white">
+            Home
+          </NavLink>
+          <NavLink to="/recipes" className="block font-medium hover:text-white">
+            All Recipes
+          </NavLink>
+          <NavLink
+            to="/add-recipe"
+            className="block font-medium hover:text-white"
+          >
+            Add Recipe
+          </NavLink>
+          <NavLink
+            to="/my-recipes"
+            className="block font-medium hover:text-white"
+          >
+            My Recipes
+          </NavLink>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Navbar;
