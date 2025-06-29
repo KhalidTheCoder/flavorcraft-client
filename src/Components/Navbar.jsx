@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import logo from "../assets/FlavorCraft.jpg";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -7,13 +8,11 @@ const Navbar = () => {
   return (
     <div>
       <header className="bg-[#A31621] text-[#FCF7F8] shadow-md sticky top-0 z-50">
-        <div className="container mx-auto flex items-center justify-between px-4 py-3 h-16">
-          <a
-            href="/"
-            className="text-2xl font-bold tracking-wide hover:text-white transition duration-300"
-          >
+        <div className="container mx-auto flex items-center justify-between px-4 py-8 h-16">
+          <div className="text-2xl flex gap-2 justify-center items-center font-bold tracking-wide hover:text-white transition duration-300">
+            <img className="w-[45px] h-[45px] rounded-4xl" src={logo} alt="" />
             FlavorCraft
-          </a>
+          </div>
 
           <nav className="hidden lg:flex space-x-6 text-sm font-medium">
             <NavLink to="/" className="relative group transition duration-300">
@@ -65,18 +64,17 @@ const Navbar = () => {
             </div> */}
 
             <div className="flex items-center space-x-2">
-              <a
-                href="/login"
-                className="text-sm font-medium hover:text-white transition duration-300"
-              >
-                Login
-              </a>
-              <a
-                href="/register"
+              <Link to="/login">
+                <button className="text-sm cursor-pointer font-semibold hover:scale-105 transform hover:text-white transition duration-300">
+                  Login
+                </button>
+              </Link>
+              <Link
+                to="/register"
                 className="px-3 py-1.5 bg-[#FCF7F8] text-[#A31621] rounded-md text-sm font-semibold transition duration-300 hover:bg-white hover:scale-105 transform"
               >
                 Register
-              </a>
+              </Link>
             </div>
           </div>
 
