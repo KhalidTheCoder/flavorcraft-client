@@ -3,6 +3,8 @@ import App from "../App";
 import Home from "../Pages/Home";
 import Register from "../Pages/Register";
 import SignIn from "../Pages/SignIn";
+import AddRecipes from "../Pages/AddRecipes";
+import MyRecipes from "../Pages/MyRecipes ";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/addRecipes",
+        Component: AddRecipes,
+      },
+      {
+        path: "/my-recipes",
+        Component: MyRecipes,
       },
     ],
   },
