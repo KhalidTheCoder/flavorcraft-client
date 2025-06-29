@@ -29,7 +29,7 @@ const Navbar = () => {
             </NavLink>
 
             <NavLink
-              to="/add-recipe"
+              to="/addRecipes"
               className="relative group transition duration-300"
             >
               <span className="hover:text-white">Add Recipe</span>
