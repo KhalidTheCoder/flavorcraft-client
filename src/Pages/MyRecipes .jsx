@@ -24,28 +24,34 @@ const MyRecipes = () => {
   };
 
   return (
-    <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-gray-50 mx-auto">
       {recipes.map((recipe) => (
-        <div key={recipe._id} className="p-4 border rounded shadow">
-          <img
-            src={recipe.image}
-            alt={recipe.title}
-            className="w-full h-40 object-cover rounded"
-          />
-          <h2 className="text-lg font-bold mt-2">{recipe.title}</h2>
-          <p>{recipe.cuisine}</p>
-          <p>Time: {recipe.time} mins</p>
-          <p>Likes: {recipe.likeCount}</p>
-          <button
-            onClick={() => handleDelete(recipe._id)}
-            className="mt-2 bg-red-600 text-white px-3 py-1 rounded"
-          >
-            Delete
-          </button>
-         
-
-
-         
+        <div key={recipe._id} className="card bg-base-100 w-96 shadow-sm">
+          <figure>
+            <img src={recipe.image} alt={recipe.title} />
+          </figure>
+          <div className="card-body">
+            <h2 className="card-title">
+              {recipe.title}
+              <div className="badge badge-secondary">
+                Likes: {recipe.likeCount}
+              </div>
+            </h2>
+            <p>Ingredients: {recipe.ingredients}</p>
+            <p>Instructions: {recipe.instructions}</p>
+            <p>{recipe.cuisine}</p>
+            <p>Time: {recipe.time} mins</p>
+            <p>Category: {recipe.categories.join(", ")}</p>
+            <div className="card-actions justify-end">
+              <button className="badge badge-outline">Update</button>
+              <button
+                onClick={() => handleDelete(recipe._id)}
+                className="badge badge-outline"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
       ))}
     </div>
