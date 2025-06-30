@@ -1,11 +1,12 @@
-import React, { use } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
-  const { createUser } = use(AuthContext);
+  const { createUser } = useContext(AuthContext);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -21,10 +22,17 @@ const Register = () => {
 
     console.log(email, password, userProfile);
 
-    createUser(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+  createUser(email, password)
+  .then((result) => {
+    const user = result.user;
+
+    
+    updateProfile(user, {
+      displayName: userProfile.name,
+      photoURL: userProfile.photo,
+    })
+      .then(() => {
+        
         fetch("http://localhost:3000/users", {
           method: "POST",
           headers: {
@@ -46,10 +54,13 @@ const Register = () => {
           });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
+        
       });
+  })
+  .catch((error) => {
+    const errorMessage = error.message;
+    console.error("Sign-up error:", errorMessage);
+  });
   };
 
   return (

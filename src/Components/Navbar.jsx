@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "../assets/FlavorCraft.jpg";
+import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <div>
@@ -63,7 +66,7 @@ const Navbar = () => {
               />
             </div> */}
 
-            <div className="flex items-center space-x-2">
+            {/* <div className="flex items-center space-x-2">
               <Link to="/login">
                 <button className="text-sm cursor-pointer font-semibold hover:scale-105 transform hover:text-white transition duration-300">
                   Login
@@ -75,7 +78,51 @@ const Navbar = () => {
               >
                 Register
               </Link>
-            </div>
+            </div> */}
+
+            {user ? (
+              <div className="relative">
+                <button
+                  className="flex items-center space-x-2 focus:outline-none"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                >
+                  <img
+                    src={user.photoURL} 
+                    alt="User Avatar"
+                    className="w-8 h-8 rounded-full border-2 border-white"
+                  />
+                </button>
+
+                {showDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg z-50 p-4 space-y-2">
+                    <p className="text-sm font-semibold">
+                      {user.displayName}
+                    </p>
+                    <p className="text-xs text-gray-500">{user.email}</p>
+                    <button
+                      onClick={logOut}
+                      className="text-red-600 hover:underline text-sm"
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Link to="/login">
+                  <button className="text-sm font-semibold hover:scale-105 transform hover:text-white transition duration-300">
+                    Login
+                  </button>
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-3 py-1.5 bg-[#FCF7F8] text-[#A31621] rounded-md text-sm font-semibold transition duration-300 hover:bg-white hover:scale-105 transform"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
 
           <button
