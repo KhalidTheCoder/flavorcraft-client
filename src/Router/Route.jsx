@@ -5,6 +5,8 @@ import Register from "../Pages/Register";
 import SignIn from "../Pages/SignIn";
 import AddRecipes from "../Pages/AddRecipes";
 import MyRecipes from "../Pages/MyRecipes ";
+import AllRecipes from "../Pages/AllRecipes";
+import Details from "../Pages/Details";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ export const router = createBrowserRouter([
       {
         path: "/addRecipes",
         Component: AddRecipes,
+      },
+      {
+        path: "/recipes",
+        Component: AllRecipes,
+      },
+      {
+        path: "/details/:id",
+        Component: Details,
       },
       {
         path: "/my-recipes",
