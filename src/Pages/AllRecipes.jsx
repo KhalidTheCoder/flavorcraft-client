@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
+import {  BiSolidLike } from "react-icons/bi";
 
 const AllRecipes = () => {
   const [recipes, setRecipes] = useState([]);
+  const [selectedCuisine, setSelectedCuisine] = useState("All");
 
   useEffect(() => {
     fetch("http://localhost:3000/recipes")
@@ -10,29 +12,65 @@ const AllRecipes = () => {
       .then((data) => setRecipes(data));
   }, []);
 
+  const cuisineTypes = ["All"];
+  recipes.forEach((recipe) => {
+    if (!cuisineTypes.includes(recipe.cuisine)) {
+      cuisineTypes.push(recipe.cuisine);
+    }
+  });
+
+  const filteredRecipes =
+    selectedCuisine === "All"
+      ? recipes
+      : recipes.filter((recipe) => recipe.cuisine === selectedCuisine);
+
   return (
-    <div>
-      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center bg-gray-50">
-        {recipes.map((recipe) => (
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+      <div className="px-10 pt-10">
+        <label className="mr-2 text-black dark:text-white font-semibold">
+          Cuisine Type:
+        </label>
+        <select
+          className="border-2 border-black text-black dark:text-white dark:bg-gray-800 font-medium px-2 py-1 rounded"
+          value={selectedCuisine}
+          onChange={(e) => setSelectedCuisine(e.target.value)}
+        >
+          {cuisineTypes.map((type, index) => (
+            <option key={index} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="p-10 grid grid-cols-1 lg:grid-cols-4 gap-10 justify-center mx-auto">
+        {filteredRecipes.map((recipe) => (
           <div
             key={recipe._id}
-            className="card bg-base-100 w-96 shadow-sm mx-auto"
+            className="card bg-base-100 w-96 shadow-sm mx-auto text-black dark:text-white dark:bg-gray-800"
           >
             <figure>
-              <img src={recipe.image} alt={recipe.title} />
+              <img
+                src={recipe.image}
+                alt={recipe.title}
+                className="w-full h-56 object-cover"
+              />
             </figure>
-            <div className="card-body bg-gray-800 rounded-b-lg">
+            <div className="card-body">
               <h2 className="card-title flex justify-between">
                 {recipe.title}
-                <div className="badge border-none bg-[#FCF7F8] text-black">
-                  Likes: {recipe.likeCount}
+                <div className="badge border-none bg-[#A31621] text-white">
+                  <BiSolidLike></BiSolidLike> {recipe.likeCount}
                 </div>
               </h2>
-              <p>{recipe.cuisine}</p>
-              <p>Category: {recipe.categories.join(", ")}</p>
+              <p className="text-sm">Cuisine: {recipe.cuisine}</p>
+              <p className="text-sm">Time: {recipe.time} mins</p>
+              <p className="text-sm">
+                Category: {recipe.categories.join(", ")}
+              </p>
               <div className="card-actions justify-end">
                 <Link to={`/details/${recipe._id}`}>
-                  <button className="btn border-none bg-[#A31621]">
+                  <button className="btn btn-neutral">
                     View Details
                   </button>
                 </Link>

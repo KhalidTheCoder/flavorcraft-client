@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import UpdateRecipeModal from "../Components/UpdateRecipeModal";
+import EmptyState from "../Components/EmptyState";
+import {  BiSolidLike } from "react-icons/bi";
 
 const MyRecipes = () => {
   const { user } = useContext(AuthContext);
@@ -63,18 +65,26 @@ const MyRecipes = () => {
       });
   };
 
+  if (recipes.length === 0) {
+    return <EmptyState></EmptyState>;
+  }
+
   return (
-    <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center bg-gray-50 mx-auto">
+    <div className="bg-gray-50 min-h-screen">
+      <div className="p-10 grid grid-cols-1 lg:grid-cols-4 gap-10 justify-center  mx-auto">
       {recipes.map((recipe) => (
-        <div key={recipe._id} className="card bg-base-100 w-96 shadow-sm mx-auto">
+        <div
+          key={recipe._id}
+          className="card bg-base-100 w-96 shadow-sm mx-auto"
+        >
           <figure>
             <img src={recipe.image} alt={recipe.title} />
           </figure>
           <div className="card-body">
-            <h2 className="card-title">
+            <h2 className="card-title flex justify-between">
               {recipe.title}
-              <div className="badge badge-secondary">
-                Likes: {recipe.likeCount}
+              <div className="badge border-none text-white bg-[#A31621]">
+                <BiSolidLike></BiSolidLike> {recipe.likeCount}
               </div>
             </h2>
             <p>Ingredients: {recipe.ingredients}</p>
@@ -108,6 +118,7 @@ const MyRecipes = () => {
           defaultData={selectedRecipe}
         />
       )}
+    </div>
     </div>
   );
 };
