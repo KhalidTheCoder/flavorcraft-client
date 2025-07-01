@@ -51,8 +51,9 @@ const AddRecipes = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("after add", data);
         navigate("/my-recipes");
+        toast.success("Recipe Added Successfully")
+
       });
   };
 

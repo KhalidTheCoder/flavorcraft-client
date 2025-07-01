@@ -1,13 +1,14 @@
 import React from "react";
 import banner from "../assets/chicken.jpg";
-
 const Banner = () => {
   return (
-    <div>
+    <div className="my-10 mb-30">
       <div
-        className="hero min-h-screen"
+        className="hero min-h-[calc(100vh-150px)] w-11/12 mx-auto rounded-3xl overflow-hidden"
         style={{
           backgroundImage: `url(${banner})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="hero-overlay"></div>
