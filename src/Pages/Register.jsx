@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, signInWithGoogle } = useContext(AuthContext);
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -20,19 +25,69 @@ const Register = () => {
       ...rest,
     };
 
-    console.log(email, password, userProfile);
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters or long.");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setError("Password must contain at least one uppercase letter.");
+      return;
+    } else if (!/[a-z]/.test(password)) {
+      setError("Password must contain at least one lowercase letter.");
+      return;
+    }
 
-  createUser(email, password)
-  .then((result) => {
-    const user = result.user;
+    setError("");
 
-    
-    updateProfile(user, {
-      displayName: userProfile.name,
-      photoURL: userProfile.photo,
-    })
-      .then(() => {
-        
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+
+        updateProfile(user, {
+          displayName: userProfile.name,
+          photoURL: userProfile.photo,
+        })
+          .then(() => {
+            fetch("http://localhost:3000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(userProfile),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Account Has Been Created!!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  navigate(location.state?.from?.pathname || "/", {
+                    replace: true,
+                  });
+                }
+              });
+          })
+          .catch((error) => {});
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  const handleGoogleSignUp = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+
+        const userProfile = {
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        };
+
         fetch("http://localhost:3000/users", {
           method: "POST",
           headers: {
@@ -42,25 +97,23 @@ const Register = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            if (data.insertedId) {
+            if (data.insertedId || data.success) {
               Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Account Has Been Created!!",
+                title: "Account Created with Google!",
                 showConfirmButton: false,
                 timer: 1500,
+              });
+              navigate(location.state?.from?.pathname || "/", {
+                replace: true,
               });
             }
           });
       })
       .catch((error) => {
-        
+        toast.error(error.message);
       });
-  })
-  .catch((error) => {
-    const errorMessage = error.message;
-    console.error("Sign-up error:", errorMessage);
-  });
   };
 
   return (
@@ -85,7 +138,7 @@ const Register = () => {
 
           <div className="my-6 space-y-4">
             <button
-              //   onClick={handleGoogleSignUp}
+              onClick={handleGoogleSignUp}
               className="btn w-full btn-outline btn-info"
             >
               <FcGoogle size={24}></FcGoogle> Sign up With Google
@@ -155,9 +208,9 @@ const Register = () => {
                 className="w-full px-3 py-2 border rounded-md border-gray-400 bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black"
                 required
               />
-              {/* {error && (
+              {error && (
               <p className="text-red-400 text-xs font-medium mt-1">{error}</p>
-            )} */}
+            )}
             </div>
 
             <button
