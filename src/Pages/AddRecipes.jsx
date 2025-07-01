@@ -11,14 +11,22 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { AuthContext } from "../Context/AuthContext";
+import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const AddRecipes = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
+    const selectedCategories = formData.getAll("categories");
+    if (selectedCategories.length === 0) {
+      toast.error("Please select at least one category.");
+      return;
+    }
 
     const recipeData = {
       userEmail: user?.email,
@@ -44,6 +52,7 @@ const AddRecipes = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("after add", data);
+        navigate("/my-recipes");
       });
   };
 
@@ -72,6 +81,7 @@ const AddRecipes = () => {
                 id="image"
                 type="text"
                 name="image"
+                required
                 placeholder="https://example.com/image.jpg"
                 className={clsx(
                   "mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900",
@@ -91,6 +101,7 @@ const AddRecipes = () => {
                 id="title"
                 type="text"
                 name="title"
+                required
                 placeholder="Spicy Chicken Curry"
                 className={clsx(
                   "mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900",
@@ -109,6 +120,7 @@ const AddRecipes = () => {
               <Textarea
                 id="ingredients"
                 name="ingredients"
+                required
                 placeholder="Chicken, spices, oil, onions..."
                 rows={3}
                 className={clsx(
@@ -128,6 +140,7 @@ const AddRecipes = () => {
               <Textarea
                 id="instructions"
                 name="instructions"
+                required
                 placeholder="Step-by-step preparation guide..."
                 rows={4}
                 className={clsx(
@@ -148,6 +161,7 @@ const AddRecipes = () => {
                 <Select
                   id="cuisine"
                   name="cuisine"
+                  required
                   className={clsx(
                     "mt-2 block w-full appearance-none rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900",
                     "focus:outline-none focus:ring-2 focus:ring-[#A31621]",
@@ -175,6 +189,7 @@ const AddRecipes = () => {
                 id="time"
                 type="number"
                 name="time"
+                required
                 placeholder="45"
                 className={clsx(
                   "mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900",

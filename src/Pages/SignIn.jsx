@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,14 +18,44 @@ const SignIn = () => {
 
     signInUser(email, password)
       .then((userCredential) => {
-       
         const user = userCredential.user;
         console.log(user);
-        
+
+        navigate(location.state?.from?.pathname || "/", { replace: true });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        toast.error(errorMessage);
+      });
+  };
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+
+        const userProfile = {
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        };
+
+        fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userProfile),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            navigate(location.state?.from?.pathname || "/", {
+              replace: true,
+            });
+          });
+      })
+      .catch((error) => {
+        toast.error(error.message);
       });
   };
 
@@ -46,7 +81,7 @@ const SignIn = () => {
 
         <div className="my-6 space-y-4">
           <button
-            // onClick={handleGoogleSignIn}
+            onClick={handleGoogleSignIn}
             className="btn w-full btn-outline btn-info"
           >
             <FcGoogle size={24}></FcGoogle> Login With Google
