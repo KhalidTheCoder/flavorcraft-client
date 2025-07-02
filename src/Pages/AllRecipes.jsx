@@ -74,10 +74,10 @@ const AllRecipes = () => {
                   <BiSolidLike></BiSolidLike> {recipe.likeCount}
                 </div>
               </h2>
-              <p className="text-sm">Cuisine: {recipe.cuisine}</p>
-              <p className="text-sm">Time: {recipe.time} mins</p>
+              <p className="text-sm"><span className="font-semibold">Cuisine:</span> {recipe.cuisine}</p>
+              <p className="text-sm"><span className="font-semibold">Time:</span> {recipe.time} mins</p>
               <p className="text-sm">
-                Category: {recipe.categories.join(", ")}
+                <span className="font-semibold">Time:</span> {recipe.categories.join(", ")}
               </p>
               <div className="card-actions justify-end">
                 <Link to={`/details/${recipe._id}`}>
