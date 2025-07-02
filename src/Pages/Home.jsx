@@ -3,6 +3,10 @@ import Banner from '../Components/Banner';
 import TopRecipes from '../Components/TopRecipes';
 import CookingIsArt from '../Components/CookingIsArt ';
 import HowItWorks from '../Components/HowItWorks';
+import Footer from '../Components/Footer';
+import Stats from '../Components/Stats';
+import Slider from '../Components/Slider';
+
 
 const Home = () => {
   const [isDark, setIsDark] = useState(false);
@@ -36,8 +40,12 @@ const Home = () => {
       
       <Banner isDark={isDark} />
       <TopRecipes isDark={isDark} />
+      <Slider></Slider>
       <CookingIsArt></CookingIsArt>
       <HowItWorks></HowItWorks>
+      <Stats></Stats>
+      <Footer></Footer>
+      
       
     </div>
   );
