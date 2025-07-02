@@ -45,10 +45,15 @@ const TopRecipes = ({ isDark }) => {
                   <BiSolidLike></BiSolidLike> {recipe.likeCount}
                 </div>
               </h2>
-              <p className="text-sm">Cuisine: {recipe.cuisine}</p>
-              <p className="text-sm">Time: {recipe.time} mins</p>
               <p className="text-sm">
-                Category: {recipe.categories.join(", ")}
+                <span className="font-semibold">Cuisine:</span> {recipe.cuisine}
+              </p>
+              <p className="text-sm">
+                <span className="font-semibold">Time:</span> {recipe.time} mins
+              </p>
+              <p className="text-sm">
+                <span className="font-semibold">Category:</span>{" "}
+                {recipe.categories.join(", ")}
               </p>
               <div className="card-actions justify-end">
                 <Link to={`/details/${recipe._id}`}>
@@ -61,8 +66,10 @@ const TopRecipes = ({ isDark }) => {
       </div>
       <div className="flex justify-center py-10">
         <Link to="/recipes">
-          <button  className="px-6 py-3 rounded-2xl font-semibold text-white"
-              style={{ backgroundColor: "#A31621" }}>
+          <button
+            className="px-6 py-3 rounded-2xl font-semibold text-white"
+            style={{ backgroundColor: "#A31621" }}
+          >
             See All Recipes
           </button>
         </Link>
