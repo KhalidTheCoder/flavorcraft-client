@@ -2,19 +2,27 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import UpdateRecipeModal from "../Components/UpdateRecipeModal";
 import EmptyState from "../Components/EmptyState";
-import {  BiSolidLike } from "react-icons/bi";
+import { BiSolidLike } from "react-icons/bi";
+import Loading from "../Components/Loading";
+import { GrUpdate } from "react-icons/gr";
+import { MdDeleteForever } from "react-icons/md";
 
 const MyRecipes = () => {
   const { user } = useContext(AuthContext);
   const [recipes, setRecipes] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user?.email) {
+      setLoading(true);
       fetch(`http://localhost:3000/my-recipes?email=${user.email}`)
         .then((res) => res.json())
-        .then((data) => setRecipes(data));
+        .then((data) => {
+          setRecipes(data);
+          setLoading(false);
+        });
     }
   }, [user?.email]);
 
@@ -65,6 +73,14 @@ const MyRecipes = () => {
       });
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center bg-gray-50 dark:bg-gray-900">
+        <Loading />
+      </div>
+    );
+  }
+
   if (recipes.length === 0) {
     return <EmptyState></EmptyState>;
   }
@@ -72,53 +88,53 @@ const MyRecipes = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="p-10 grid grid-cols-1 lg:grid-cols-4 gap-10 justify-center  mx-auto">
-      {recipes.map((recipe) => (
-        <div
-          key={recipe._id}
-          className="card bg-base-100 w-96 shadow-sm mx-auto"
-        >
-          <figure>
-            <img src={recipe.image} alt={recipe.title} />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title flex justify-between">
-              {recipe.title}
-              <div className="badge border-none text-white bg-[#A31621]">
-                <BiSolidLike></BiSolidLike> {recipe.likeCount}
+        {recipes.map((recipe) => (
+          <div
+            key={recipe._id}
+            className="card bg-base-100 w-96 shadow-sm mx-auto"
+          >
+            <figure>
+              <img src={recipe.image} alt={recipe.title} />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title flex justify-between">
+                {recipe.title}
+                <div className="badge border-none text-white bg-[#A31621]">
+                  <BiSolidLike></BiSolidLike> {recipe.likeCount}
+                </div>
+              </h2>
+              <p>Ingredients: {recipe.ingredients}</p>
+              <p>Instructions: {recipe.instructions}</p>
+              <p>{recipe.cuisine}</p>
+              <p>Time: {recipe.time} mins</p>
+              <p>Category: {recipe.categories.join(", ")}</p>
+              <div className="card-actions justify-end">
+                <button
+                  onClick={() => handleUpdateClick(recipe)}
+                  className="btn btn-neutral btn-outline"
+                >
+                  Update <GrUpdate />
+                </button>
+                <button
+                  onClick={() => handleDelete(recipe._id)}
+                  className="btn btn-neutral btn-outline"
+                >
+                  Delete <MdDeleteForever size={25} />
+                </button>
               </div>
-            </h2>
-            <p>Ingredients: {recipe.ingredients}</p>
-            <p>Instructions: {recipe.instructions}</p>
-            <p>{recipe.cuisine}</p>
-            <p>Time: {recipe.time} mins</p>
-            <p>Category: {recipe.categories.join(", ")}</p>
-            <div className="card-actions justify-end">
-              <button
-                onClick={() => handleUpdateClick(recipe)}
-                className="badge badge-outline"
-              >
-                Update
-              </button>
-              <button
-                onClick={() => handleDelete(recipe._id)}
-                className="badge badge-outline"
-              >
-                Delete
-              </button>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
 
-      {selectedRecipe && (
-        <UpdateRecipeModal
-          isOpen={showModal}
-          onClose={() => setShowModal(false)}
-          handleSubmit={handleUpdateSubmit}
-          defaultData={selectedRecipe}
-        />
-      )}
-    </div>
+        {selectedRecipe && (
+          <UpdateRecipeModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+            handleSubmit={handleUpdateSubmit}
+            defaultData={selectedRecipe}
+          />
+        )}
+      </div>
     </div>
   );
 };

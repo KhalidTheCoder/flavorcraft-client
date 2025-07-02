@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
-import {  BiSolidLike } from "react-icons/bi";
+import { BiSolidLike } from "react-icons/bi";
+import Loading from "../Components/Loading";
 
 const AllRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [selectedCuisine, setSelectedCuisine] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:3000/recipes")
       .then((res) => res.json())
       .then((data) => setRecipes(data));
+    setLoading(false);
   }, []);
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center bg-gray-50 dark:bg-gray-900">
+        <Loading />
+      </div>
+    );
+  }
 
   const cuisineTypes = ["All"];
   recipes.forEach((recipe) => {
@@ -70,9 +81,7 @@ const AllRecipes = () => {
               </p>
               <div className="card-actions justify-end">
                 <Link to={`/details/${recipe._id}`}>
-                  <button className="btn btn-neutral">
-                    View Details
-                  </button>
+                  <button className="btn btn-neutral">View Details</button>
                 </Link>
               </div>
             </div>

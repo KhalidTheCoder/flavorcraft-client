@@ -8,11 +8,13 @@ import MyRecipes from "../Pages/MyRecipes ";
 import AllRecipes from "../Pages/AllRecipes";
 import Details from "../Pages/Details";
 import PrivateRoute from "./PrivateRoute";
+import Error from "../Components/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -56,5 +58,10 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+
+  {
+    path: "*",
+    element: <Error />,
   },
 ]);

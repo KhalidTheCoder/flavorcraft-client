@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigation } from "react-router";
 import logo from "../assets/FlavorCraft.jpg";
 import { AuthContext } from "../Context/AuthContext";
 
@@ -7,6 +7,8 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
 
   return (
     <div>
@@ -87,7 +89,7 @@ const Navbar = () => {
                   onClick={() => setShowDropdown(!showDropdown)}
                 >
                   <img
-                    src={user.photoURL} 
+                    src={user.photoURL}
                     alt="User Avatar"
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
@@ -95,9 +97,7 @@ const Navbar = () => {
 
                 {showDropdown && (
                   <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg z-50 p-4 space-y-2">
-                    <p className="text-sm font-semibold">
-                      {user.displayName}
-                    </p>
+                    <p className="text-sm font-semibold">{user.displayName}</p>
                     <p className="text-xs text-gray-500">{user.email}</p>
                     <button
                       onClick={logOut}
@@ -145,6 +145,10 @@ const Navbar = () => {
           </button>
         </div>
       </header>
+
+      {isLoading && (
+        <span className="loading loading-infinity loading-xl"></span>
+      )}
 
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-[#A31621] text-[#FCF7F8] px-4 py-2 space-y-2">

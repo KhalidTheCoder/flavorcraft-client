@@ -24,6 +24,7 @@
     "react-simple-typewriter": "^5.0.1",
     "react-toastify": "^11.0.5",
     "sweetalert2": "^11.22.1",
+    "swiper": "^11.2.10",
     "tailwind-variants": "^1.0.0",
     "tailwindcss": "^4.1.11"
   },

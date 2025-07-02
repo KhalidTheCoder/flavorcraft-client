@@ -1,5 +1,6 @@
 import React from "react";
 import banner from "../assets/chicken.jpg";
+import { Link } from "react-router";
 const Banner = () => {
   return (
     <div className="my-10 mb-30">
@@ -22,12 +23,19 @@ const Banner = () => {
               your creations, and connect with fellow food lovers. Find, cook,
               and enjoy something amazing today!
             </p>
-            <button
+
+              <Link to='/recipes'>
+              
+                     <button
               className="px-6 py-3 rounded-full font-semibold text-white"
               style={{ backgroundColor: "#A31621" }}
             >
               Explore Recipes
             </button>
+
+              </Link>
+
+           
           </div>
         </div>
       </div>
