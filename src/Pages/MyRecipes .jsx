@@ -103,11 +103,22 @@ const MyRecipes = () => {
                   <BiSolidLike></BiSolidLike> {recipe.likeCount}
                 </div>
               </h2>
-              <p><span className="font-semibold">Ingredients:</span> {recipe.ingredients}</p>
-              <p><span className="font-semibold">Instructions:</span> {recipe.instructions}</p>
+              <p>
+                <span className="font-semibold">Ingredients:</span>{" "}
+                {recipe.ingredients}
+              </p>
+              <p>
+                <span className="font-semibold">Instructions:</span>{" "}
+                {recipe.instructions}
+              </p>
               <p className="font-semibold">{recipe.cuisine}</p>
-              <p><span className="font-semibold">Time:</span> {recipe.time} mins</p>
-              <p><span className="font-semibold">Category:</span> {recipe.categories.join(", ")}</p>
+              <p>
+                <span className="font-semibold">Time:</span> {recipe.time} mins
+              </p>
+              <p>
+                <span className="font-semibold">Category:</span>{" "}
+                {recipe.categories.join(", ")}
+              </p>
               <div className="card-actions justify-end">
                 <button
                   onClick={() => handleUpdateClick(recipe)}
