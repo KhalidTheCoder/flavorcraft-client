@@ -9,7 +9,7 @@ const Details = () => {
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/recipes/${id}`)
+    fetch(`https://flavor-craft-27690.web.app/recipes/${id}`)
       .then((res) => res.json())
       .then((data) => setRecipe(data));
   }, [id]);
@@ -27,7 +27,7 @@ const Details = () => {
 
     const updatedLikeCount = (recipe.likeCount || 0) + 1;
 
-    fetch(`http://localhost:3000/recipes/${recipe._id}`, {
+    fetch(`https://flavor-craft-27690.web.app/recipes/${recipe._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

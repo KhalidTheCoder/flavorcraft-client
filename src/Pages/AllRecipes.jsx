@@ -10,7 +10,7 @@ const AllRecipes = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:3000/recipes")
+    fetch("https://flavor-craft-27690.web.app/recipes")
       .then((res) => res.json())
       .then((data) => setRecipes(data));
     setLoading(false);

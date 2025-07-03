@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA6LSGZ1_MZgCdO2jj_TRMwBLrcTp8dg5U",
-  authDomain: "flavor-craft-27690.firebaseapp.com",
-  projectId: "flavor-craft-27690",
-  storageBucket: "flavor-craft-27690.firebasestorage.app",
-  messagingSenderId: "92044694521",
-  appId: "1:92044694521:web:6472982135b9896b846328",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

@@ -42,7 +42,7 @@ const AddRecipes = () => {
 
     console.log(recipeData);
 
-    fetch("http://localhost:3000/recipes", {
+    fetch("https://flavor-craft-27690.web.app/recipes", {
       method: "POST",
       headers: {
         "content-type": "application/json",
