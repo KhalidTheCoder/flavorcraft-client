@@ -7,10 +7,10 @@ const EmptyState = () => {
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         No Recipes Found
       </h2>
-      <p className="text-gray-600 mb-4">
+      <p className="text-gray-600 text-center mb-4">
         You don't have any recipes yet. Start by adding some!
       </p>
-      <Link to='/addRecipes'>
+      <Link to='/add-recipes'>
         <button className="px-6 py-2 border-none bg-[#A31621] text-white rounded-lg hover:bg-[#880f1a]">
           Add New Recipe
         </button>
