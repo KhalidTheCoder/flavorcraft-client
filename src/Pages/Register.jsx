@@ -47,7 +47,7 @@ const Register = () => {
           photoURL: userProfile.photo,
         })
           .then(() => {
-            fetch("http://localhost:3000/users", {
+            fetch("https://flavor-craft-27690.web.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -88,7 +88,7 @@ const Register = () => {
           photo: user.photoURL,
         };
 
-        fetch("http://localhost:3000/users", {
+        fetch("https://flavor-craft-27690.web.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

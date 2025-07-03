@@ -6,7 +6,7 @@ const TopRecipes = ({ isDark }) => {
   const [topRecipes, setTopRecipes] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/recipes/top")
+    fetch("https://flavor-craft-27690.web.app/recipes/top")
       .then((res) => res.json())
       .then((data) => setTopRecipes(data));
   }, []);

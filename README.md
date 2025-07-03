@@ -1,12 +1,34 @@
-# React + Vite
+🍽️ FlavorCraft
+A full-stack recipe management app where users can add, view, update, and like recipes.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 Live Website
+Client: https://flavor-craft-27690.web.app/
+Server: https://flavor-crafter-server-gbtis7c4d-khalidthecoders-projects.vercel.app/
 
-Currently, two official plugins are available:
+🚩 Features
+Firebase Authentication (Google login)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Add, update, delete personal recipes
 
-## Expanding the ESLint configuration
+Like recipes and view top-liked on Home
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Filter recipes by cuisine
+
+Responsive design (mobile, tablet, desktop)
+
+Dark/Light theme toggle
+
+Animations with Lottie & React Awesome Reveal
+
+🛠️ Tech Stack
+React.js, React Router, Tailwind CSS
+
+Firebase Authentication
+
+Node.js, Express.js, MongoDB
+
+📁 Hosting
+Client: Firebase Hosting
+
+Server: Vercel Hosting
+

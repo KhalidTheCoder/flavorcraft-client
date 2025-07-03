@@ -17,7 +17,7 @@ const MyRecipes = () => {
   useEffect(() => {
     if (user?.email) {
       setLoading(true);
-      fetch(`http://localhost:3000/my-recipes?email=${user.email}`)
+      fetch(`https://flavor-craft-27690.web.app/my-recipes?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setRecipes(data);
@@ -27,7 +27,7 @@ const MyRecipes = () => {
   }, [user?.email]);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3000/recipes/${id}`, {
+    fetch(`https://flavor-craft-27690.web.app/recipes/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -57,7 +57,7 @@ const MyRecipes = () => {
         .map((input) => input.value),
     };
 
-    fetch(`http://localhost:3000/recipes/${selectedRecipe._id}`, {
+    fetch(`https://flavor-craft-27690.web.app/recipes/${selectedRecipe._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedRecipe),
