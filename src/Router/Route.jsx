@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
         Component: Register,
       },
       {
-        path: "/addRecipes",
+        path: "/add-recipes",
         element: (
           <PrivateRoute>
             <AddRecipes></AddRecipes>

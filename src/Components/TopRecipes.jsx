@@ -6,7 +6,7 @@ const TopRecipes = ({ isDark }) => {
   const [topRecipes, setTopRecipes] = useState([]);
 
   useEffect(() => {
-    fetch("https://flavor-craft-27690.web.app/recipes/top")
+    fetch("https://flavor-sever-two.vercel.app/recipes/top")
       .then((res) => res.json())
       .then((data) => setTopRecipes(data));
   }, []);
@@ -29,7 +29,7 @@ const TopRecipes = ({ isDark }) => {
         {topRecipes.map((recipe) => (
           <div
             key={recipe._id}
-            className="card bg-base-100 w-96 shadow-sm mx-auto text-black dark:text-white dark:bg-gray-800"
+            className="card bg-base-100 w-full max-w-xs md:w-96 shadow-sm mx-auto text-black dark:text-white dark:bg-gray-800"
           >
             <figure>
               <img

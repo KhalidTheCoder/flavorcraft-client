@@ -17,7 +17,9 @@ const MyRecipes = () => {
   useEffect(() => {
     if (user?.email) {
       setLoading(true);
-      fetch(`https://flavor-craft-27690.web.app/my-recipes?email=${user.email}`)
+      fetch(
+        `https://flavor-sever-two.vercel.app/my-recipes?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setRecipes(data);
@@ -27,7 +29,7 @@ const MyRecipes = () => {
   }, [user?.email]);
 
   const handleDelete = (id) => {
-    fetch(`https://flavor-craft-27690.web.app/recipes/${id}`, {
+    fetch(`https://flavor-sever-two.vercel.app/recipes/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -57,7 +59,7 @@ const MyRecipes = () => {
         .map((input) => input.value),
     };
 
-    fetch(`https://flavor-craft-27690.web.app/recipes/${selectedRecipe._id}`, {
+    fetch(`https://flavor-sever-two.vercel.app/recipes/${selectedRecipe._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedRecipe),
@@ -73,6 +75,10 @@ const MyRecipes = () => {
       });
   };
 
+  if (recipes.length === 0) {
+    return <EmptyState></EmptyState>;
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center bg-gray-50 dark:bg-gray-900">
@@ -81,17 +87,13 @@ const MyRecipes = () => {
     );
   }
 
-  if (recipes.length === 0) {
-    return <EmptyState></EmptyState>;
-  }
-
   return (
     <div className="bg-gray-50 min-h-screen">
-      <div className="p-10 grid grid-cols-1 lg:grid-cols-4 gap-10 justify-center  mx-auto">
+      <div className="p-10 grid grid-cols-1 lg:grid-cols-4 gap-10 justify-center mx-auto">
         {recipes.map((recipe) => (
           <div
             key={recipe._id}
-            className="card bg-base-100 w-96 shadow-sm mx-auto"
+            className="card bg-base-100 w-full max-w-xs md:w-96 shadow-sm mx-auto"
           >
             <figure>
               <img src={recipe.image} alt={recipe.title} />

@@ -2,8 +2,8 @@
 A full-stack recipe management app where users can add, view, update, and like recipes.
 
 🔗 Live Website
-Client: https://flavor-craft-27690.web.app/
-Server: https://flavor-crafter-server-gbtis7c4d-khalidthecoders-projects.vercel.app/
+Client: https://flavor-sever-two.vercel.app/
+Server: https://flavor-sever-two.vercel.app/
 
 🚩 Features
 Firebase Authentication (Google login)

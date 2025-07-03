@@ -10,7 +10,7 @@ const AllRecipes = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://flavor-craft-27690.web.app/recipes")
+    fetch("https://flavor-sever-two.vercel.app/recipes")
       .then((res) => res.json())
       .then((data) => setRecipes(data));
     setLoading(false);
@@ -58,7 +58,7 @@ const AllRecipes = () => {
         {filteredRecipes.map((recipe) => (
           <div
             key={recipe._id}
-            className="card bg-base-100 w-96 shadow-sm mx-auto text-black dark:text-white dark:bg-gray-800"
+            className="card bg-base-100 w-full max-w-xs md:w-96 shadow-sm mx-auto text-black dark:text-white dark:bg-gray-800"
           >
             <figure>
               <img
@@ -74,10 +74,15 @@ const AllRecipes = () => {
                   <BiSolidLike></BiSolidLike> {recipe.likeCount}
                 </div>
               </h2>
-              <p className="text-sm"><span className="font-semibold">Cuisine:</span> {recipe.cuisine}</p>
-              <p className="text-sm"><span className="font-semibold">Time:</span> {recipe.time} mins</p>
               <p className="text-sm">
-                <span className="font-semibold">Time:</span> {recipe.categories.join(", ")}
+                <span className="font-semibold">Cuisine:</span> {recipe.cuisine}
+              </p>
+              <p className="text-sm">
+                <span className="font-semibold">Time:</span> {recipe.time} mins
+              </p>
+              <p className="text-sm">
+                <span className="font-semibold">Time:</span>{" "}
+                {recipe.categories.join(", ")}
               </p>
               <div className="card-actions justify-end">
                 <Link to={`/details/${recipe._id}`}>
