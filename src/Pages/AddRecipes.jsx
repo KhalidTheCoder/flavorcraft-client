@@ -42,7 +42,7 @@ const AddRecipes = () => {
 
     console.log(recipeData);
 
-    fetch("https://flavor-craft-27690.web.app/recipes", {
+    fetch("https://flavor-sever-two.vercel.app/recipes", {
       method: "POST",
       headers: {
         "content-type": "application/json",
