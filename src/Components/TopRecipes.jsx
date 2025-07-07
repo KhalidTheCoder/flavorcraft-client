@@ -4,12 +4,25 @@ import { BiSolidLike } from "react-icons/bi";
 
 const TopRecipes = ({ isDark }) => {
   const [topRecipes, setTopRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch("https://flavor-sever-two.vercel.app/recipes/top")
       .then((res) => res.json())
-      .then((data) => setTopRecipes(data));
+      .then((data) => {
+        setTopRecipes(data);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex justify-center items-center bg-gray-50 dark:bg-gray-900">
+        <span className="loading loading-infinity loading-xl"></span>
+      </div>
+    );
+  }
 
   return (
     <div

@@ -12,8 +12,10 @@ const AllRecipes = () => {
     setLoading(true);
     fetch("https://flavor-sever-two.vercel.app/recipes")
       .then((res) => res.json())
-      .then((data) => setRecipes(data));
-    setLoading(false);
+      .then((data) => {
+        setRecipes(data);
+        setLoading(false);
+      });
   }, []);
   if (loading) {
     return (
