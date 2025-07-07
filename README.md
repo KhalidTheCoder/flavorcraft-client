@@ -2,7 +2,7 @@
 A full-stack recipe management app where users can add, view, update, and like recipes.
 
 🔗 Live Website
-Client: https://flavor-sever-two.vercel.app/
+Client: https://flavor-craft-27690.web.app/
 Server: https://flavor-sever-two.vercel.app/
 
 🚩 Features
