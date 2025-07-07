@@ -75,16 +75,16 @@ const MyRecipes = () => {
       });
   };
 
-  if (recipes.length === 0) {
-    return <EmptyState></EmptyState>;
-  }
-
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center bg-gray-50 dark:bg-gray-900">
         <Loading />
       </div>
     );
+  }
+
+  if (recipes.length === 0) {
+    return <EmptyState></EmptyState>;
   }
 
   return (
