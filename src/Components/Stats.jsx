@@ -3,7 +3,7 @@ import user from "../assets/person.jpg"
 
 const Stats = () => {
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center py-10">
       <div className="stats shadow bg-orange-50 text-gray-800">
         
         <div className="stat">
