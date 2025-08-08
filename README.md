@@ -93,3 +93,5 @@ FlavorCraft is a full-stack recipe management platform where users can add, view
 6. Open your browser and go to:
    ```arduino
    http://localhost:3000
+
+Note: Add .env to your .gitignore to keep environment variables secure.
