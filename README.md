@@ -59,3 +59,37 @@ FlavorCraft is a full-stack recipe management platform where users can add, view
    ```bash
    git clone https://github.com/KhalidTheCoder/flavorcraft-client.git
    git clone https://github.com/KhalidTheCoder/flavorcraft-server.git
+
+2. Set up and run the server:
+   ```bash
+   cd flavorcraft-server
+   npm install
+   nodemon index.js
+
+3. Set up and run the client:
+   
+   Open a new terminal and navigate to the client directory:
+     
+    ```bash
+    cd flavorcraft-client
+    npm install
+
+4. Create a .env file in the client folder and add your environment variables (example):
+   
+     ```ini
+    VITE_API_URL=http://localhost:5000
+
+    VITE_apiKey=your_firebase_api_key
+    VITE_authDomain=your_firebase_auth_domain
+    VITE_projectId=your_firebase_project_id
+    VITE_storageBucket=your_firebase_storage_bucket
+    VITE_messagingSenderId=your_firebase_messaging_sender_id
+    VITE_appId=your_firebase_app_id
+
+5. Start the client:
+   ```bash
+   npm run dev
+
+6. Open your browser and go to:
+   ```arduino
+   http://localhost:3000
